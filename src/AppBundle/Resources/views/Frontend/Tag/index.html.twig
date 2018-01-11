@@ -1,0 +1,54 @@
+{% extends '@App/Frontend/layout.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('css/table.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/modal.css') }}" />
+{% endblock %}
+{% block page_content %}
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4>Tags</h4>
+                </div>
+                <div class="panel-body">
+                    <button class="btn btn-success add-button" data-rname="tag_new">Add new</button>
+
+                    <table class="table table-hover table-striped" data-entity="tag">
+                        <thead>
+                        <tr>
+                            <th class="col-sm-1{% if pagination.isSorted('t.id') %} sorted{% endif %}">{{ knp_pagination_sortable(pagination, '#', 't.id') }}</th>
+                            <th{% if pagination.isSorted('t.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Name', 't.name') }}</th>
+                            <th class="col-sm-1">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for tag in pagination %}
+                            <tr>
+                                <th scope="row">{{ tag.id }}</th>
+                                <td>{{ tag.name }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-link edit-button" data-rname="tag_edit" data-id="{{ tag.id }}"><span class="glyphicon glyphicon-edit"></span></button>
+                                    <button type="button" class="btn btn-link delete-button" data-rname="tag_delete" data-id="{{ tag.id }}"><span class="glyphicon glyphicon-remove"></span></button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('js/modal.js') }}"></script>
+{% endblock %}

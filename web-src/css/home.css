@@ -1,0 +1,26 @@
+.panel {
+    margin-top: 30px;
+}
+
+.panel-heading {
+    height: 60px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.panel-body {
+    height: 130px;
+}
+
+.panel-footer {
+    height: 60px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.navigation {
+    text-align: center;
+}

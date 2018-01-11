@@ -1,0 +1,21 @@
+{
+  "name": "library",
+  "description": "Online library",
+  "main": "index.js",
+  "authors": [
+    "Volodymyr Kravchuk"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/PulsarV/Library",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "chosen": "^1.8.2"
+  }
+}

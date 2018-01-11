@@ -1,0 +1,38 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "Online library",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "npm install",
+    "postinstall": "bower install && gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PulsarV/Library.git"
+  },
+  "author": "Volodymyr Kravchuk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PulsarV/Library/issues"
+  },
+  "homepage": "https://github.com/PulsarV/Library#readme",
+  "dependencies": {
+    "bower": "^1.8.2",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-clean-css": "^3.9.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-less": "^3.4.0",
+    "gulp-plumber": "^1.2.0",
+    "gulp-sourcemaps": "^2.6.3",
+    "gulp-uglify": "^3.0.0",
+    "gulp-watch": "^5.0.0",
+    "imagemin-pngquant": "^5.0.1"
+  }
+}
