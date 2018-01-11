@@ -9,6 +9,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class DefaultController
+ * @package AppBundle\Controller\Frontend
+ */
 class DefaultController extends Controller
 {
     /**

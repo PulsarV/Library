@@ -15,7 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
  * @UniqueEntity(fields={"name"}, message="This category already exists")
  */
-class Category
+class Category implements \JsonSerializable
 {
     /**
      * @var int
@@ -116,6 +116,17 @@ class Category
         }
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+        ];
     }
 }
 

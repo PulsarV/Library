@@ -18,7 +18,7 @@
                     <table class="table table-hover table-striped" data-entity="category">
                         <thead>
                         <tr>
-                            <th class="col-sm-1{% if pagination.isSorted('c.id') %} sorted{% endif %}">{{ knp_pagination_sortable(pagination, '#', 'c.id') }}</th>
+                            <th class="col-sm-1">#</th>
                             <th{% if pagination.isSorted('c.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Name', 'c.name') }}</th>
                             <th class="col-sm-1">Actions</th>
                         </tr>
@@ -26,7 +26,7 @@
                         <tbody>
                         {% for category in pagination %}
                             <tr>
-                                <th scope="row">{{ category.id }}</th>
+                                <th scope="row">{{ pagination.getPaginationData.firstItemNumber + loop.index0 }}</th>
                                 <td>{{ category.name }}</td>
                                 <td>
                                     <button type="button" class="btn btn-link edit-button" data-rname="category_edit" data-id="{{ category.id }}"><span class="glyphicon glyphicon-edit"></span></button>

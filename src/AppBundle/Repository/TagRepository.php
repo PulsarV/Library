@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 /**
  * TagRepository
@@ -12,6 +13,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class TagRepository extends EntityRepository
 {
+    /**
+     * @return Query
+     */
     public function getFindAllQuery()
     {
         return $this->createQueryBuilder('t')->getQuery();

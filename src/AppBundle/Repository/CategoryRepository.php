@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 /**
  * CategoryRepository
@@ -12,6 +13,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+    /**
+     * @return Query
+     */
     public function getFindAllQuery()
     {
         return $this->createQueryBuilder('c')->getQuery();

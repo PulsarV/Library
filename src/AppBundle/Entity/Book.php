@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="book")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BookRepository")
  */
-class Book
+class Book implements \JsonSerializable
 {
     /**
      * @var int
@@ -97,11 +97,15 @@ class Book
 
     /**
      * @param Category $category
+     *
+     * @return Book
      */
     public function setCategory(Category $category)
     {
         $this->category = $category;
         $category->addBook($this);
+
+        return $this;
     }
 
     /**
@@ -126,11 +130,31 @@ class Book
         return $this;
     }
 
+    /**
+     * @param Tag $tag
+     *
+     * @return Book
+     */
     public function removeTag(Tag $tag)
     {
         if ($this->tags->contains($tag)) {
             $this->tags->remove($tag);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'category' => $this->getCategory(),
+            'tags' => $this->getTags()->toArray(),
+        ];
     }
 }
 

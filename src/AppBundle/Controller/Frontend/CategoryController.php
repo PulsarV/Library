@@ -8,7 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -96,7 +95,6 @@ class CategoryController extends Controller
 
         return [
             'form_edit' => $form->createView(),
-            'id' => $category->getId(),
             'entity_name' => 'category',
         ];
     }
@@ -119,6 +117,15 @@ class CategoryController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($booksCount = $category->getBooks()->count()) {
+                return $this->render('@App/Frontend/deleteErrorModal.html.twig', [
+                    'entity_name' => 'category',
+                    'rel_entity_name' => 'book',
+                    'name' => $category->getName(),
+                    'used_count' => $booksCount,
+                ]);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->remove($category);
             $em->flush();
@@ -128,7 +135,6 @@ class CategoryController extends Controller
 
         return [
             'form_delete' => $form->createView(),
-            'id' => $category->getId(),
             'name' => $category->getName(),
             'entity_name' => 'category',
         ];

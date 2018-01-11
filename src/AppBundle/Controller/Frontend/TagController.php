@@ -2,13 +2,13 @@
 
 namespace AppBundle\Controller\Frontend;
 
+use AppBundle\Entity\Book;
 use AppBundle\Entity\Tag;
 use AppBundle\Form\TagType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -96,7 +96,6 @@ class TagController extends Controller
 
         return [
             'form_edit' => $form->createView(),
-            'id' => $tag->getId(),
             'entity_name' => 'tag',
         ];
     }
@@ -119,6 +118,16 @@ class TagController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $books = $this->getDoctrine()->getRepository(Book::class)->findByTagNames([$tag->getName()]);
+            if ($booksCount = count($books)) {
+                return $this->render('@App/Frontend/deleteErrorModal.html.twig', [
+                    'entity_name' => 'tag',
+                    'rel_entity_name' => 'book',
+                    'name' => $tag->getName(),
+                    'used_count' => $booksCount,
+                ]);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->remove($tag);
             $em->flush();
@@ -128,7 +137,6 @@ class TagController extends Controller
 
         return [
             'form_delete' => $form->createView(),
-            'id' => $tag->getId(),
             'name' => $tag->getName(),
             'entity_name' => 'tag',
         ];

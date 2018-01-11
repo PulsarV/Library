@@ -13,6 +13,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -37,6 +41,9 @@ class BookType extends AbstractType
         ;
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -44,6 +51,9 @@ class BookType extends AbstractType
         ]);
     }
 
+    /**
+     * @return string
+     */
     public function getBlockPrefix()
     {
         return 'app_bundle_book_type';

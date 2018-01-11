@@ -95,7 +95,6 @@ class BookController extends Controller
 
         return [
             'form_edit' => $form->createView(),
-            'id' => $book->getId(),
             'entity_name' => 'book',
         ];
     }
@@ -127,7 +126,6 @@ class BookController extends Controller
 
         return [
             'form_delete' => $form->createView(),
-            'id' => $book->getId(),
             'name' => $book->getName(),
             'entity_name' => 'book',
         ];

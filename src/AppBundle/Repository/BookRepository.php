@@ -3,6 +3,7 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 /**
  * BookRepository
@@ -12,11 +13,82 @@ use Doctrine\ORM\EntityRepository;
  */
 class BookRepository extends EntityRepository
 {
+    /**
+     * @return Query
+     */
     public function getFindAllQuery()
     {
         return $this->createQueryBuilder('b')
+            ->select('b', 'c', 't')
             ->join('b.category', 'c')
             ->leftJoin('b.tags', 't')
             ->getQuery();
+    }
+
+    /**
+     * @param $name
+     * @return array
+     */
+    public function findByNameLike($name)
+    {
+        return $this->createQueryBuilder('b')
+            ->select('b', 'c', 't')
+            ->join('b.category', 'c')
+            ->leftJoin('b.tags', 't')
+            ->where('b.name LIKE :name')
+            ->setParameter('name', '%'.$name.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param array $tagNames
+     * @return array
+     */
+    public function findByTagNames(array $tagNames)
+    {
+        return $this->createQueryBuilder('b')
+            ->select('b', 'c', 't')
+            ->join('b.category', 'c')
+            ->join('b.tags', 't')
+            ->where('t.name in (:tags)')
+            ->setParameter('tags', $tagNames)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param $categoryName
+     * @return array
+     */
+    public function findByCategoryName($categoryName)
+    {
+        return $this->createQueryBuilder('b')
+            ->select('b', 'c', 't')
+            ->join('b.category', 'c')
+            ->leftJoin('b.tags', 't')
+            ->where('c.name = :category')
+            ->setParameter('category', $categoryName)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param $categoryName
+     * @param $tagName
+     * @return array
+     */
+    public function findByCategoryAndTagName($categoryName, $tagName)
+    {
+        return $this->createQueryBuilder('b')
+            ->select('b', 'c', 't')
+            ->join('b.category', 'c')
+            ->leftJoin('b.tags', 't')
+            ->where('c.name = :category')
+            ->setParameter('category', $categoryName)
+            ->andWhere('t.name = :tag')
+            ->setParameter('tag', $tagName)
+            ->getQuery()
+            ->getResult();
     }
 }

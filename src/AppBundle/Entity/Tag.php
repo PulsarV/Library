@@ -13,7 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\TagRepository")
  * @UniqueEntity(fields={"name"}, message="This tag already exists")
  */
-class Tag
+class Tag implements \JsonSerializable
 {
     /**
      * @var int
@@ -65,6 +65,17 @@ class Tag
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+        ];
     }
 }
 
