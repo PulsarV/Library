@@ -15,6 +15,10 @@ class RemoveBooksByTagCommand extends Command
     /** @var Registry */
     private $doctrine;
 
+    /**
+     * RemoveBooksByTagCommand constructor.
+     * @param Registry $doctrine
+     */
     public function __construct(Registry $doctrine)
     {
         parent::__construct();

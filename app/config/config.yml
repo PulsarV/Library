@@ -81,3 +81,38 @@ knp_paginator:
         pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig'     # sliding pagination controls template
         sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # sort link template
         filtration: '@KnpPaginator/Pagination/filtration.html.twig'  # filters template
+
+old_sound_rabbit_mq:
+    connections:
+        default:
+            host:     '%rabbit_mq_host%'
+            port:     '%rabbit_mq_port%'
+            user:     '%rabbit_mq_user%'
+            password: '%rabbit_mq_password%'
+            vhost:    '/'
+            lazy:     false
+            connection_timeout: 3
+            read_write_timeout: 3
+            keepalive: false
+            heartbeat: 0
+            use_socket: false
+    producers:
+        change_category:
+            connection:       default
+            exchange_options: { name: '%rabbit_queue_name%', type: direct }
+
+    consumers:
+        change_category:
+            connection:       default
+            exchange_options: { name: '%rabbit_queue_name%', type: direct }
+            queue_options:    { name: '%rabbit_queue_name%' }
+            callback:         library.consumer_category_changer
+
+monolog:
+    channels: [rabbit]
+    handlers:
+        rabbit_log:
+            type: stream
+            path: "%kernel.logs_dir%/rabbit_%kernel.environment%.log"
+            level: debug
+            channels: [rabbit]

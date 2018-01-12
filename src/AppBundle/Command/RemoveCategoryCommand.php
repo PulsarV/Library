@@ -16,6 +16,10 @@ class RemoveCategoryCommand extends Command
     /** @var Registry */
     private $doctrine;
 
+    /**
+     * RemoveCategoryCommand constructor.
+     * @param Registry $doctrine
+     */
     public function __construct(Registry $doctrine)
     {
         parent::__construct();

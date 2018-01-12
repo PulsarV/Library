@@ -18,5 +18,11 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
 
+    rabbit_mq_host: 127.0.0.1
+    rabbit_mq_port: 5672
+    rabbit_mq_user: 'guest'
+    rabbit_mq_password: 'guest'
+    rabbit_queue_name: 'notification.change_category'
+
     main_page_pagination_limit: 6
     pagination_limit: 10

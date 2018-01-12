@@ -39,15 +39,31 @@ services:
         tags:
             - { name: console.command }
 
-    command_remove_books_by_tag:
+    library.command_remove_books_by_tag:
         alias: AppBundle\Command\RemoveBooksByTagCommand
         public: true
 
     AppBundle\Command\RemoveCategoryCommand:
-            arguments: ['@doctrine']
-            tags:
-                - { name: console.command }
+        arguments: ['@doctrine']
+        tags:
+            - { name: console.command }
 
-    command_remove_category:
+    library.command_remove_category:
         alias: AppBundle\Command\RemoveCategoryCommand
+        public: true
+
+    AppBundle\Command\ChangeCategoryCommand:
+        arguments: ['@doctrine', '@old_sound_rabbit_mq.change_category_producer']
+        tags:
+            - { name: console.command }
+
+    library.command_change_category:
+        alias: AppBundle\Command\ChangeCategoryCommand
+        public: true
+
+    Appbundle\Consumer\ChangeCategoryConsumer:
+        arguments: ['@doctrine', '@monolog.logger.rabbit']
+
+    library.consumer_category_changer:
+        alias: Appbundle\Consumer\ChangeCategoryConsumer
         public: true
