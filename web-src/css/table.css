@@ -11,12 +11,22 @@
     margin: 0 auto;
 }
 
+table {
+    table-layout: fixed;
+}
+
 th > a {
     color: #333;
 }
 
 th.sorted > a {
     text-decoration: none;
+}
+
+td {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .add-button {

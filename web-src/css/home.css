@@ -1,13 +1,18 @@
 .panel {
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 .panel-heading {
-    height: 60px;
+    display: inline-table;
+    width: 100%;
+    height: 80px;
     text-align: center;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+}
+
+.panel-heading h4{
+    display: table-cell;
+    vertical-align: middle;
+    line-height: normal;
 }
 
 .panel-body {
