@@ -33,3 +33,21 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+    AppBundle\Command\RemoveBooksByTagCommand:
+        arguments: ['@doctrine']
+        tags:
+            - { name: console.command }
+
+    command_remove_books_by_tag:
+        alias: AppBundle\Command\RemoveBooksByTagCommand
+        public: true
+
+    AppBundle\Command\RemoveCategoryCommand:
+            arguments: ['@doctrine']
+            tags:
+                - { name: console.command }
+
+    command_remove_category:
+        alias: AppBundle\Command\RemoveCategoryCommand
+        public: true
