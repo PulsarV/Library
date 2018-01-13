@@ -77,7 +77,7 @@ case "$Keypress" in
     echo ================
     ./vendor/bin/phpunit
 ;;
-10)
+0)
     exit 0
 ;;
 *)
