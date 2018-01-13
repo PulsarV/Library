@@ -18,7 +18,7 @@
                     <table class="table table-hover table-striped" data-entity="book">
                         <thead>
                         <tr>
-                            <th class="col-sm-1">#</th>
+                            <th class="col-sm-1{% if pagination.isSorted('b.id') %} sorted{% endif %}">{{ knp_pagination_sortable(pagination, '#', 'b.id') }}</th>
                             <th{% if pagination.isSorted('b.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Name', 'b.name') }}</th>
                             <th{% if pagination.isSorted('c.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Category', 'c.name') }}</th>
                             <th>Tags</th>
