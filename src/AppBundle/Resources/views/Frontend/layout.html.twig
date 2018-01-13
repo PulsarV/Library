@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% set menu_items = {
+    books: { title: 'Books', index_route: 'book_index', route_start: 'book_' },
+    categories: { title: 'Categories', index_route: 'category_index', route_start: 'category_' },
+    tags: { title: 'Tags', index_route: 'tag_index', route_start: 'tag_' }
+} %}
+
+{% set current_route = app.request.attributes.get('_route') %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/layout.css') }}" />
+{% endblock %}
+
+{% block body %}
+    {% block page_header %}
+        <div class="jumbotron">
+            <div class="container text-center">
+                <h1>Online Library</h1>
+            </div>
+        </div>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ path('homepage') }}">Library</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        {% for item in menu_items %}
+                            {% if current_route starts with item.route_start %}
+                                <li class="active"><a href="{{ path(item.index_route) }}">{{ item.title }} <span class="sr-only">(current)</span></a></li>
+                            {% else %}
+                                <li><a href="{{ path(item.index_route) }}">{{ item.title }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    {% endblock %}
+    {% block page_content %}
+    {% endblock %}
+    {% block page_footer %}
+        <footer class="container-fluid text-center">
+            <p>Copyright Volodymyr Kravchuk 2018</p>
+        </footer>
+    {% endblock %}
+{% endblock %}

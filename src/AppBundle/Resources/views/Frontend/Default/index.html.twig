@@ -1,0 +1,35 @@
+{% extends '@App/Frontend/layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}" />
+{% endblock %}
+{% block page_content %}
+    <div class="container">
+        <div class="row">
+            {% for book in pagination %}
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4>{{ book.name }}</h4>
+                        </div>
+                        <div class="panel-body"><img src="https://placehold.it/100x100?text=BOOK PHOTO" class="img-responsive" style="margin: 0 auto;" alt="Book photo"></div>
+                        <div class="panel-footer">
+                            Category: {{ book.category.name }}<br>
+                            Tags:
+                            {%- for tag in book.tags -%}
+                                {{ tag.name }}{% if not loop.last %}, {% endif %}
+                            {%- endfor -%}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

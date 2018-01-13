@@ -1,0 +1,48 @@
+.panel-heading {
+    text-align: center;
+}
+
+.panel-footer {
+    height: 56px;
+    text-align: center;
+}
+
+.panel-footer .pagination {
+    margin: 0 auto;
+}
+
+table {
+    table-layout: fixed;
+}
+
+th > a {
+    color: #333;
+}
+
+th.sorted > a {
+    text-decoration: none;
+}
+
+td {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.add-button {
+    width: 100px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.edit-button, .delete-button {
+    padding: 0 5px;
+}
+
+.edit-button {
+    color: black;
+}
+
+.delete-button {
+    color: red;
+}
