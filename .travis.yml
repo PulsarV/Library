@@ -1,0 +1,11 @@
+language: php
+php:
+  - 5.6
+before_script:
+  - sleep 10
+  - composer self-update
+  - composer install
+  - cp app/config/parameters.yml.dist app/config/parameters.yml
+  - ./bin/console cache:warmup --env=test --quiet
+script:
+  - ./vendor/bin/phpunit
