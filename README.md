@@ -6,14 +6,14 @@ Master: [![Build Status](https://travis-ci.org/PulsarV/Library.svg?branch=master
 Master: [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/PulsarV/Library/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/PulsarV/Library/?branch=master) Dev: [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/PulsarV/Library/badges/quality-score.png?b=dev)](https://scrutinizer-ci.com/g/PulsarV/Library/?branch=dev)
 
 
-#### Installation
-Project require installed npm & RabbitMQ server.
+### Installation
+Project requires installed npm & RabbitMQ server.
 
 For setup project use simple configuration script ```./config.sh``` in project directory (run ```chmod +x ./config.sh``` before)
 
 For using RabbitMQ run ```./bin/console rabbitmq:consumer change_category``` in project directory
 
-#### Console commands
+### Console commands
 
 Move all books from one catogory to another
 ```
@@ -28,7 +28,7 @@ Delete category that have the specified name
 ./bin/console library:remove:category
 ```
 
-#### API
+### API
 Return all books that name is similar to "Name"
 ```
 /api/book/Name
