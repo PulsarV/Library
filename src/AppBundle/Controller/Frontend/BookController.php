@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 class BookController extends Controller
 {
     /**
-     * @Route("/", name="book_index")
+     * @Route("", name="book_index")
      * @Method("GET")
      * @Template("@App/Frontend/Book/index.html.twig")
      *
@@ -41,7 +42,7 @@ class BookController extends Controller
     }
 
     /**
-     * @Route("/new/", options={"expose"=true}, name="book_new")
+     * @Route("/new", options={"expose"=true}, name="book_new")
      * @Method({"GET", "POST"})
      * @Template("@App/Frontend/newModal.html.twig")
      *
@@ -71,7 +72,7 @@ class BookController extends Controller
     }
 
     /**
-     * @Route("{book}/edit/", options={"expose"=true}, name="book_edit")
+     * @Route("/{book}/edit", options={"expose"=true}, name="book_edit")
      * @Method({"GET", "POST"})
      * @Template("@App/Frontend/editModal.html.twig")
      *
@@ -100,7 +101,7 @@ class BookController extends Controller
     }
 
     /**
-     * @Route("{book}/delete/", options={"expose"=true}, name="book_delete")
+     * @Route("/{book}/delete", options={"expose"=true}, name="book_delete")
      * @Method({"GET", "DELETE"})
      * @Template("@App/Frontend/deleteModal.html.twig")
      *
@@ -110,7 +111,7 @@ class BookController extends Controller
      */
     public function deleteAction(Request $request, Book $book)
     {
-        $form = $this->createFormBuilder($book, [
+        $form = $this->get('form.factory')->createNamedBuilder('app_bundle_delete_book_type', FormType::class, $book, [
             'method' => Request::METHOD_DELETE,
             'action' => $this->generateUrl('book_delete', ['book' => $book->getId()]),
         ])->getForm();

@@ -61,9 +61,9 @@ services:
         alias: AppBundle\Command\ChangeCategoryCommand
         public: true
 
-    Appbundle\Consumer\ChangeCategoryConsumer:
+    AppBundle\Consumer\ChangeCategoryConsumer:
         arguments: ['@doctrine', '@monolog.logger.rabbit']
 
     library.consumer_category_changer:
-        alias: Appbundle\Consumer\ChangeCategoryConsumer
+        alias: AppBundle\Consumer\ChangeCategoryConsumer
         public: true

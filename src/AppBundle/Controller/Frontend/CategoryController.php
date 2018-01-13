@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 class CategoryController extends Controller
 {
     /**
-     * @Route("/", name="category_index")
+     * @Route("", name="category_index")
      * @Method("GET")
      * @Template("@App/Frontend/Category/index.html.twig")
      *
@@ -41,7 +42,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * @Route("/new/", options={"expose"=true}, name="category_new")
+     * @Route("/new", options={"expose"=true}, name="category_new")
      * @Method({"GET", "POST"})
      * @Template("@App/Frontend/newModal.html.twig")
      *
@@ -71,7 +72,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * @Route("{category}/edit/", options={"expose"=true}, name="category_edit")
+     * @Route("/{category}/edit", options={"expose"=true}, name="category_edit")
      * @Method({"GET", "POST"})
      * @Template("@App/Frontend/editModal.html.twig")
      *
@@ -100,7 +101,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * @Route("{category}/delete/", options={"expose"=true}, name="category_delete")
+     * @Route("/{category}/delete", options={"expose"=true}, name="category_delete")
      * @Method({"GET", "DELETE"})
      * @Template("@App/Frontend/deleteModal.html.twig")
      *
@@ -110,7 +111,7 @@ class CategoryController extends Controller
      */
     public function deleteAction(Request $request, Category $category)
     {
-        $form = $this->createFormBuilder($category, [
+        $form = $this->get('form.factory')->createNamedBuilder('app_bundle_delete_category_type', FormType::class, $category, [
             'method' => Request::METHOD_DELETE,
             'action' => $this->generateUrl('category_delete', ['category' => $category->getId()]),
         ])->getForm();

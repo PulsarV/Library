@@ -26,3 +26,6 @@ parameters:
 
     main_page_pagination_limit: 6
     pagination_limit: 10
+
+    # This parameter used as HTTP_HOST value in tests
+    server_name: library.local

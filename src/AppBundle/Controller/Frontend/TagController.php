@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 class TagController extends Controller
 {
     /**
-     * @Route("/", name="tag_index")
+     * @Route("", name="tag_index")
      * @Method("GET")
      * @Template("@App/Frontend/Tag/index.html.twig")
      *
@@ -42,7 +43,7 @@ class TagController extends Controller
     }
 
     /**
-     * @Route("/new/", options={"expose"=true}, name="tag_new")
+     * @Route("/new", options={"expose"=true}, name="tag_new")
      * @Method({"GET", "POST"})
      * @Template("@App/Frontend/newModal.html.twig")
      *
@@ -72,7 +73,7 @@ class TagController extends Controller
     }
 
     /**
-     * @Route("{tag}/edit/", options={"expose"=true}, name="tag_edit")
+     * @Route("/{tag}/edit", options={"expose"=true}, name="tag_edit")
      * @Method({"GET", "POST"})
      * @Template("@App/Frontend/editModal.html.twig")
      *
@@ -101,7 +102,7 @@ class TagController extends Controller
     }
 
     /**
-     * @Route("{tag}/delete/", options={"expose"=true}, name="tag_delete")
+     * @Route("/{tag}/delete", options={"expose"=true}, name="tag_delete")
      * @Method({"GET", "DELETE"})
      * @Template("@App/Frontend/deleteModal.html.twig")
      *
@@ -111,9 +112,9 @@ class TagController extends Controller
      */
     public function deleteAction(Request $request, Tag $tag)
     {
-        $form = $this->createFormBuilder($tag, [
+        $form = $this->get('form.factory')->createNamedBuilder('app_bundle_delete_tag_type', FormType::class, $tag, [
             'method' => Request::METHOD_DELETE,
-            'action' => $this->generateUrl('tag_delete', ['tag' => $tag->getId()]),
+            'action' => $this->generateUrl('tag_delete', ['tag' => $tag->getId()])
         ])->getForm();
         $form->handleRequest($request);
 

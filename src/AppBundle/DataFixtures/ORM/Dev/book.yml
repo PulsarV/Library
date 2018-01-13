@@ -1,5 +1,5 @@
 AppBundle\Entity\Book:
     book_{1..24}:
-        name(unique): <(rtrim($fake('sentence', null, 5, true), '.'))>
+        name: <(rtrim($fake('sentence', null, 5, true), '.'))>
         category: '@category*'
-        tags: "<numberBetween(1, 20)>x @tag*"
+        tags: '<numberBetween(1, 20)>x @tag*'

@@ -1,0 +1,5 @@
+AppBundle\Entity\Book:
+    book_{1..11}:
+        name: 'Book<current()>'
+        category: '@category_<current()>'
+        tags: ['@tag_<current()>']

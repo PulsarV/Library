@@ -57,7 +57,6 @@ $(function() {
 
     modal.find('form').on('submit', function(e) {
       e.preventDefault();
-      event.preventDefault();
       var form = $(this);
       $.ajax({
         type: form.attr('method'),
